@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>康哥工作台 — 对外状态页</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #e8f0f8;
+    --bg-card: #ffffff;
+    --bg-card-hover: #f0f6ff;
+    --border: #d0dce8;
+    --text: #2c3e50;
+    --text-bright: #0f1a2e;
+    --text-dim: #7a8a9a;
+    --blue: #2563eb;
+    --blue-glow: rgba(37,99,235,0.15);
+    --gold: #d97706;
+    --green: #059669;
+    --red: #dc2626;
+    --radius: 14px;
+    --radius-sm: 10px;
+  }
+  body {
+    font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 20px;
+  }
+  .wrap { max-width: 1200px; margin: 0 auto; }
+
+  /* ===== HEADER ===== */
+  .header {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    margin-bottom: 16px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    box-shadow: 0 2px 8px rgba(15,26,46,0.04);
+  }
+  .header-title { font-size: 24px; font-weight: 900; color: var(--text-bright); letter-spacing: 1px; }
+  .header-title .kk { color: var(--blue); }
+  .header-sub { font-size: 12px; color: var(--text-dim); margin-top: 3px; }
+  .header-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .date-badge {
+    background: var(--blue-glow); color: var(--blue);
+    padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 14px;
+  }
+  .refresh-badge {
+    background: #f0f4f9; color: var(--text-dim);
+    padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;
+  }
+
+  /* ===== 总览条 ===== */
+  .overview {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;
+    margin-bottom: 16px;
+  }
+  .ov-card {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 14px 16px; display: flex; align-items: center; gap: 12px;
+    cursor: pointer; transition: all .15s ease;
+  }
+  .ov-card:hover { border-color: var(--blue); box-shadow: 0 3px 12px var(--blue-glow); transform: translateY(-2px); }
+  .ov-dot { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+  .ov-dot.ok { background: rgba(5,150,105,0.12); }
+  .ov-dot.warn { background: rgba(217,119,6,0.12); }
+  .ov-dot.miss { background: rgba(220,38,38,0.10); }
+  .ov-name { font-size: 13px; color: var(--text-dim); font-weight: 600; }
+  .ov-val { font-size: 15px; font-weight: 800; color: var(--text-bright); margin-top: 2px; }
+
+  /* ===== 区块标题 ===== */
+  .section-title {
+    font-size: 15px; font-weight: 800; color: var(--text-bright);
+    margin: 22px 0 10px; display: flex; align-items: center; gap: 8px;
+  }
+  .section-title .bar { width: 4px; height: 16px; background: var(--blue); border-radius: 2px; }
+
+  /* ===== 项目卡片 ===== */
+  .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(460px, 1fr)); gap: 16px; }
+  @media (max-width: 540px) { .projects { grid-template-columns: 1fr; } }
+
+  .project {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(15,26,46,0.04);
+    transition: box-shadow .2s;
+  }
+  .project:hover { box-shadow: 0 6px 20px rgba(15,26,46,0.08); }
+  .project-head {
+    padding: 16px 20px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .project-head.red { background: linear-gradient(180deg, #fef2f2 0%, #ffffff 100%); }
+  .project-head.blue { background: linear-gradient(180deg, #eff6ff 0%, #ffffff 100%); }
+  .project-name { font-size: 18px; font-weight: 900; color: var(--text-bright); }
+  .pill { font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
+  .pill.ok { background: rgba(5,150,105,0.12); color: var(--green); }
+  .pill.warn { background: rgba(217,119,6,0.12); color: var(--gold); }
+  .pill.miss { background: rgba(220,38,38,0.10); color: var(--red); }
+
+  .project-body { padding: 16px 20px 20px; }
+
+  .stat-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px;
+    margin-bottom: 16px;
+  }
+  .stat {
+    background: #f7fafd; border: 1px solid var(--border); border-radius: var(--radius-sm);
+    padding: 10px 12px; transition: all .15s;
+  }
+  .stat:hover { background: var(--bg-card-hover); border-color: var(--blue); }
+  .stat-label { font-size: 11px; color: var(--text-dim); font-weight: 600; }
+  .stat-val { font-size: 16px; font-weight: 800; color: var(--text-bright); margin-top: 3px; }
+  .stat-note { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+
+  .btn { display: inline-flex; align-items: center; gap: 6px; }
+  .btn.gold {
+    padding: 8px 14px; border-radius: 10px; text-decoration: none;
+    background: var(--gold); color: #fff; font-size: 13px; font-weight: 600;
+    white-space: nowrap; transition: all .15s ease;
+  }
+  .btn.gold:hover { background: #b45309; transform: translateY(-1px); }
+
+  .foot { text-align: center; color: var(--text-dim); font-size: 12px; margin-top: 20px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <div>
+      <div class="header-title">🖥️ 康哥<span class="kk">工作台</span> <span style="font-size:13px;font-weight:600;color:var(--text-dim);">对外状态页</span></div>
+      <div class="header-sub">一页看全项目进度 · 状态每日自动更新</div>
+    </div>
+    <div class="header-right">
+      <span class="refresh-badge" id="refreshBadge">⏱ 数据更新中…</span>
+      <span class="date-badge" id="dateBadge"></span>
+    </div>
+  </div>
+
+  <!-- 总览 -->
+  <div class="overview" id="overview"></div>
+
+  <!-- 项目 -->
+  <div class="section-title"><span class="bar"></span>📚 项目状态</div>
+  <div class="projects" id="projects"></div>
+
+  <div class="foot">康哥工作台 · 状态每日 9 点自动刷新 · <span id="footGen"></span></div>
+</div>
+
+<!-- 实时状态（由 update_workbench.py 生成，仅含公开字段） -->
+<script src="state.js"></script>
+<script>
+const PAD = n => String(n).padStart(2, '0');
+function today() {
+  const d = new Date();
+  return `${d.getFullYear()}-${PAD(d.getMonth()+1)}-${PAD(d.getDate())}`;
+}
+
+const DEFAULT_STATE = {
+  qiepian: {
+    name: '切片知识库', emoji: '✂️', color: 'red',
+    status: 'warn', statusText: '状态待刷新',
+    stats: [ {label:'最新日榜',val:'—',note:''}, {label:'最新稿件',val:'—',note:''}, {label:'产出文件',val:'—',note:''}, {label:'全库笔记',val:'—',note:''} ],
+    feishu: 'https://fzyjxswl.feishu.cn/wiki/ND2BwvWP5iZcF7k3fjBc6ixEnMg?sheet=6988bf',
+    feishu_name: '媒体工作表（同事共用）',
+  },
+  ai: {
+    name: 'AI公众号', emoji: '🤖', color: 'blue',
+    status: 'warn', statusText: '状态待刷新',
+    stats: [ {label:'最新日榜',val:'—',note:''}, {label:'选题数',val:'—',note:''}, {label:'待审稿件',val:'—',note:''}, {label:'定位文档',val:'—',note:''} ],
+    feishu: null,
+  },
+  generated_at: '',
+};
+
+let STATE = DEFAULT_STATE;
+try {
+  if (typeof WINDOW_STATE !== 'undefined' && WINDOW_STATE && Object.keys(WINDOW_STATE).length) {
+    STATE = WINDOW_STATE;
+  }
+} catch (e) {}
+
+document.getElementById('dateBadge').textContent = '📅 ' + today();
+if (STATE.generated_at) {
+  document.getElementById('refreshBadge').textContent = '⏱ 更新于 ' + STATE.generated_at;
+  document.getElementById('footGen').textContent = '上次生成 ' + STATE.generated_at;
+}
+
+function statusEmoji(s) { return s === 'ok' ? '✅' : (s === 'warn' ? '⚠️' : '⛔'); }
+function statusDotClass(s) { return s === 'ok' ? 'ok' : (s === 'warn' ? 'warn' : 'miss'); }
+function statusPillText(s) { return s === 'ok' ? '运行中' : (s === 'warn' ? '待更新' : '异常'); }
+
+function renderOverview() {
+  const ov = document.getElementById('overview');
+  ov.innerHTML = '';
+  for (const key of ['qiepian', 'ai']) {
+    const p = STATE[key];
+    if (!p) continue;
+    ov.innerHTML += `
+      <div class="ov-card">
+        <div class="ov-dot ${statusDotClass(p.status)}">${statusEmoji(p.status)}</div>
+        <div>
+          <div class="ov-name">${p.emoji} ${p.name}</div>
+          <div class="ov-val">${p.statusText}</div>
+        </div>
+      </div>`;
+  }
+}
+
+function renderProjects() {
+  const container = document.getElementById('projects');
+  container.innerHTML = '';
+  for (const key of ['qiepian', 'ai']) {
+    const p = STATE[key];
+    if (!p) continue;
+    const statsHtml = (p.stats || []).map(s => `
+      <div class="stat">
+        <div class="stat-label">${s.label}</div>
+        <div class="stat-val">${s.val}</div>
+        <div class="stat-note">${s.note}</div>
+      </div>`).join('');
+
+    let btns = '';
+    if (p.feishu) btns += `<a class="btn gold" href="${p.feishu}" target="_blank">📋 ${p.feishu_name || '飞书文档'}</a>`;
+
+    container.innerHTML += `
+      <div class="project">
+        <div class="project-head ${p.color}">
+          <div class="project-name">${p.emoji} ${p.name}</div>
+          <span class="pill ${statusDotClass(p.status)}">${statusPillText(p.status)}</span>
+        </div>
+        <div class="project-body">
+          <div class="stat-grid">${statsHtml}</div>
+          ${btns ? `<div style="margin-top:4px;">${btns}</div>` : ''}
+        </div>
+      </div>`;
+  }
+}
+
+renderOverview();
+renderProjects();
+</script>
+</body>
+</html>
