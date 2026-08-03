@@ -1,6 +1,6 @@
-// 由 update_workbench.py 自动生成 — 2026-08-03 11:03
+// 由 update_workbench.py 自动生成 — 2026-08-03 17:34
 const WINDOW_STATE = {
-  "generated_at": "2026-08-03 11:03",
+  "generated_at": "2026-08-03 17:34",
   "qiepian": {
     "name": "切片知识库",
     "emoji": "✂️",
@@ -60,12 +60,12 @@ const WINDOW_STATE = {
       },
       {
         "label": "待审稿件",
-        "val": "0",
+        "val": "3",
         "note": "02_内容/draft"
       },
       {
         "label": "定位文档",
-        "val": "账号定位v1.md",
+        "val": "人群与变现策略.md",
         "note": "00_定位与策略"
       }
     ],
@@ -95,5 +95,5 @@ const WINDOW_STATE = {
     "task_status": "pending 待康哥确认选题",
     "handoff": "项目协作/当前Codex任务.md"
   },
-  "timestamp": "2026-08-03 11:03"
+  "timestamp": "2026-08-03 17:34"
 };
