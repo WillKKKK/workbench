@@ -1,18 +1,18 @@
-// 由 update_workbench.py 自动生成 — 2026-08-06 09:00
+// 由 update_workbench.py 自动生成 — 2026-08-07 09:00
 const WINDOW_STATE = {
-  "generated_at": "2026-08-06 09:00",
+  "generated_at": "2026-08-07 09:00",
   "qiepian": {
     "name": "切片知识库",
     "emoji": "✂️",
     "color": "red",
     "path": "D:\\Hermes\\Obsidian\\切片知识库",
     "status": "warn",
-    "statusText": "日榜停在 2026-08-05",
+    "statusText": "日榜停在 2026-08-06",
     "stats": [
       {
         "label": "最新日榜",
-        "val": "2026-08-05",
-        "note": "08-05 09:10"
+        "val": "2026-08-06",
+        "note": "08-06 09:06"
       },
       {
         "label": "最新稿件",
@@ -21,12 +21,12 @@ const WINDOW_STATE = {
       },
       {
         "label": "产出文件",
-        "val": "16",
+        "val": "17",
         "note": "稿件+日报"
       },
       {
         "label": "全库笔记",
-        "val": "190",
+        "val": "192",
         "note": "Markdown 文件"
       }
     ],
@@ -88,5 +88,5 @@ const WINDOW_STATE = {
       "note": "需个人访问链接"
     }
   ],
-  "timestamp": "2026-08-06 09:00"
+  "timestamp": "2026-08-07 09:00"
 };
