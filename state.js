@@ -1,6 +1,6 @@
-// 由 update_workbench.py 自动生成 — 2026-08-07 09:00
+// 由 update_workbench.py 自动生成 — 2026-08-08 09:00
 const WINDOW_STATE = {
-  "generated_at": "2026-08-07 09:00",
+  "generated_at": "2026-08-08 09:00",
   "qiepian": {
     "name": "切片知识库",
     "emoji": "✂️",
@@ -21,12 +21,12 @@ const WINDOW_STATE = {
       },
       {
         "label": "产出文件",
-        "val": "17",
+        "val": "18",
         "note": "稿件+日报"
       },
       {
         "label": "全库笔记",
-        "val": "192",
+        "val": "196",
         "note": "Markdown 文件"
       }
     ],
@@ -88,5 +88,5 @@ const WINDOW_STATE = {
       "note": "需个人访问链接"
     }
   ],
-  "timestamp": "2026-08-07 09:00"
+  "timestamp": "2026-08-08 09:00"
 };
