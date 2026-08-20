@@ -1,6 +1,6 @@
-// 由 update_workbench.py 自动生成 — 2026-08-19 09:00
+// 由 update_workbench.py 自动生成 — 2026-08-20 09:00
 const WINDOW_STATE = {
-  "generated_at": "2026-08-19 09:00",
+  "generated_at": "2026-08-20 09:00",
   "collaboration": {
     "status": "review",
     "status_text": "Hermes 验收中",
@@ -19,7 +19,7 @@ const WINDOW_STATE = {
     "color": "red",
     "path": "D:\\Hermes\\Obsidian\\切片知识库",
     "status": "miss",
-    "statusText": "日榜停更 13 天",
+    "statusText": "日榜停更 14 天",
     "stats": [
       {
         "label": "最新日榜",
@@ -33,12 +33,12 @@ const WINDOW_STATE = {
       },
       {
         "label": "产出文件",
-        "val": "34",
+        "val": "35",
         "note": "稿件+日报"
       },
       {
         "label": "全库笔记",
-        "val": "268",
+        "val": "269",
         "note": "Markdown 文件"
       }
     ],
@@ -100,5 +100,5 @@ const WINDOW_STATE = {
       "note": "需个人访问链接"
     }
   ],
-  "timestamp": "2026-08-19 09:00"
+  "timestamp": "2026-08-20 09:00"
 };
