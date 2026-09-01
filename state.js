@@ -1,6 +1,6 @@
-// 由 update_workbench.py 自动生成 — 2026-08-31 09:00
+// 由 update_workbench.py 自动生成 — 2026-09-01 09:00
 const WINDOW_STATE = {
-  "generated_at": "2026-08-31 09:00",
+  "generated_at": "2026-09-01 09:00",
   "collaboration": {
     "status": "review",
     "status_text": "Hermes 验收中",
@@ -33,12 +33,12 @@ const WINDOW_STATE = {
       },
       {
         "label": "产出文件",
-        "val": "50",
+        "val": "51",
         "note": "稿件+日报"
       },
       {
         "label": "全库笔记",
-        "val": "305",
+        "val": "307",
         "note": "Markdown 文件"
       }
     ],
@@ -100,5 +100,5 @@ const WINDOW_STATE = {
       "note": "需个人访问链接"
     }
   ],
-  "timestamp": "2026-08-31 09:00"
+  "timestamp": "2026-09-01 09:00"
 };
