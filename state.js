@@ -1,6 +1,6 @@
-// 由 update_workbench.py 自动生成 — 2026-09-08 09:00
+// 由 update_workbench.py 自动生成 — 2026-09-09 09:00
 const WINDOW_STATE = {
-  "generated_at": "2026-09-08 09:00",
+  "generated_at": "2026-09-09 09:00",
   "collaboration": {
     "status": "review",
     "status_text": "Hermes 验收中",
@@ -100,5 +100,5 @@ const WINDOW_STATE = {
       "note": "需个人访问链接"
     }
   ],
-  "timestamp": "2026-09-08 09:00"
+  "timestamp": "2026-09-09 09:00"
 };
